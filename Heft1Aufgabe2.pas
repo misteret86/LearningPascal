@@ -37,6 +37,32 @@ begin
     
     
     {HIER MEIN CODE HIN}
+  
+  i := 1;
+  j := 1;
+  
+  for k := 1 to ERGEBNISFELDLAENGE do
+  begin
+    if (Feld1[i] < Feld2[j]) then
+    begin
+      ErgebnisFeld[k] := Feld1[i];
+      i := i + 1;
+    end
+    else
+    begin
+        ErgebnisFeld[k] := Feld2[j];
+        j := j + 1;
+    end;
+    
+  if i > FELDLAENGE1 then
+    i := FELDLAENGE1;
+  if j > FELDLAENGE2 then
+    j := FELDLAENGE2;
+  end;
+    
+    
+    
+    {ENDE MEIN CODE}
     
     
     writeln ('Das Ergebnisfeld ist:');
