@@ -40,24 +40,36 @@ begin
   
   i := 1;
   j := 1;
+    {Zurücksetzen der Feldindzes}
   
   for k := 1 to ERGEBNISFELDLAENGE do
+      {Ergebnisfeld wird nacheinander sortiert ausgefüllt}
   begin
-    if (Feld1[i] < Feld2[j]) then
-    begin
-      ErgebnisFeld[k] := Feld1[i];
-      i := i + 1;
-    end
-    else
+    if (i > FELDLAENGE1) then 
+        {Ende von Feld1 erreicht, dann nur noch Feld2 eintragen}
     begin
         ErgebnisFeld[k] := Feld2[j];
         j := j + 1;
-    end;
-    
-  if i > FELDLAENGE1 then
-    i := FELDLAENGE1;
-  if j > FELDLAENGE2 then
-    j := FELDLAENGE2;
+    end
+    else
+      if  (j > FELDLAENGE2) then
+          {Ende von Feld2 erreicht, dann nur noch Feld1 eintragen}
+      begin
+        ErgebnisFeld[k] := Feld1[i];
+        i := i + 1;
+      end
+    else    
+      if (Feld1[i] <= Feld2[j]) then
+          {Werte aus den Feldern vergleichen und kleineren eintragen}
+      begin
+        ErgebnisFeld[k] := Feld1[i];
+        i := i + 1;
+      end
+      else
+      begin
+          ErgebnisFeld[k] := Feld2[j];
+          j := j + 1;
+      end
   end;
     
     
@@ -68,5 +80,7 @@ begin
     writeln ('Das Ergebnisfeld ist:');
   for k := 1 to ERGEBNISFELDLAENGE do
     write (ErgebnisFeld[k], ' ');
-  writeln
+  {writeln}
+  readln(k);
+  writeln(k)
 end.
