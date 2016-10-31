@@ -51,7 +51,18 @@ begin
   A[5,4] := 18;
   A[5,5] := 11;
   
-  {A korrekt}{
+  writeln('');
+  writeln('Vorher');
+  for i := 1 to GROESSE do
+  begin
+    writeln('');
+    for j := 1 to GROESSE do
+      write (' ', A[i,j]);
+  end;
+  writeln('');
+  writeln('');
+  
+  {A korrekt}
   begin
     for i := 1 to GROESSE-1 do
       for j := i+1 to GROESSE do
@@ -61,9 +72,8 @@ begin
         A[j,i] := tauschPuffer
       end
   end;
-  {A END}}
   
-  {B START}{
+  {B START korrekt}
   begin
   for i := 1 to GROESSE do
     for j := 1 to i do
@@ -73,9 +83,8 @@ begin
       A[j,i] := tauschPuffer
     end
   end;
-  {B END}}
   
-  C 	
+{C falsch}{
 begin
   for i := 1 to GROESSE do
     for j := 1 to GROESSE do
@@ -84,9 +93,9 @@ begin
       A[i,j] := A[j,i];
       A[j,i] := tauschPuffer
     end
-end;
+end}
 
-D 	
+{D falsch}{ 	
 begin
   for i := 1 to GROESSE do
     for j := 1 to GROESSE-i do
@@ -95,9 +104,9 @@ begin
       A[i,j] := A[j,i];
       A[j,i] := tauschPuffer
     end
-end;
+end;}
 
-E 	
+{E falsch}{
 begin
   for i := 1 to GROESSE-1 do
     for j := i+1 to GROESSE do
@@ -106,11 +115,10 @@ begin
       A[j,i] := A[i,j];
       A[j,i] := tauschPuffer
     end
-end;
+end;}
   
   
-  
-  
+  writeln('Nachher');
   for i := 1 to GROESSE do
   begin
     writeln('');
@@ -119,6 +127,7 @@ end;
   end;
   writeln('');
 
+  readln(i);
 
   
 
