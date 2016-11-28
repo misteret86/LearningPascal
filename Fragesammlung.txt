@@ -1,0 +1,17 @@
+Was soll das var bei Funktionsparametern?
+
+Seite 149
+Wie schon erwähnt gibt es in Standard-Pascal nur zwei Arten der Parameterübergabe: 
+Wertübergabe (call-by-value) und Referenzübergabe (call-by-reference).
+Wertübergabe haben wir schon bei den Funktionen kennengelernt, Wertparameter
+werden durch kein Schlüsselwort gekennzeichnet. Zur Unterscheidung wird den
+Referenzparametern das Schlüsselwort var vorangestellt.
+
+Meine Frage:
+Warum wird bei reinen input parametern, die ja auch call-by-reference sind,
+kein var vorangestellt?
+
+Beispiel 6.1.1:
+function BBKnotenSuchen (
+inZahl : integer;
+inRefWurzel : tRefBinBaum): tRefBinBaum;

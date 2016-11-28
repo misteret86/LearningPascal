@@ -50,6 +50,7 @@ program TesteSortiereListe(input, output);
  {****MEIN CODE START****}
  var 
  Zeiger,
+ Temp,
  SuchePosition,
  RefListeAnfang,
  Sortiert,
@@ -61,42 +62,44 @@ program TesteSortiereListe(input, output);
  RefListeAnfang := ioRefListe;
  Zeiger := ioRefListe;
 
+ writeln('ioRefListe^.info : ', ioRefListe^.info);
+ writeln('ioRefListe^.next^.info : ', ioRefListe^.next^.info);
+ writeln('ioRefListe^.next^.next^.info : ', ioRefListe^.next^.next^.info);
+ writeln('');
+ writeln('');
+ writeln('');
+ writeln('');
+ writeln('');
+
  Sortiert := Zeiger; 
  {Zeigt auf den aktuellen Zeiger bis zur sortierten Stelle}
  Unsortiert := Zeiger^.next;
+ new(Temp);
  {Zeigt auf den aktuellen Zeiger ab unsortierter Stelle}
  writeln('Sortiert : ', Sortiert^.info);
  writeln('Unsortiert : ', Unsortiert^.info);
  writeln('RefListeAnfang : ', RefListeAnfang^.info);
-  if (Zeiger <> nil) then
-	  if (Zeiger^.next <> nil) then
-	  { mindestens zwei Werte in Liste }
-	  begin	  
-		while Zeiger^.next <> nil do
-		{ Alle Elemente bis Ende der Liste durchgehen }
-		begin
-			if Sortiert^.info < Unsortiert^.info then
-			{ Kein kleineres Element in Unsortiert gefunden.}
-				Unsortiert := Unsortiert^.next
-			else
-			{ Kleineres Element in Unsortiert gefunden.}
-			begin
-				{1. An erstes Element setzen}
-				{2. Einfuegeposition suchen}
-				{3. Als letztes Element setzen}
-				
-				{1.}
-				if (RefListeAnfang^.info > Unsortiert^.info) then
-				begin
-					//Unsortiert^.next := RefListeAnfang;
-					//RefListeAnfang := Unsortiert^.next;
-					{ Sonderfall: Einfuegen am Listenanfang }
-								
-				end;
-			end;
-		Zeiger := Zeiger^.next;
-		end;{Ende while Schleife. Zeiger^.next = nil ist true}	
-	  end;{endif Prüfung auf mindestens zwei Werte in Liste}
+ 
+ writeln('Vertasuche 1. und 2. Stelle');
+ 
+ { ioRefListe^.info = 2
+ * ioRefListe^.next^.info = 1   -> Zeiger
+ * ioRefListe^.next^.next^.info = 3}
+Zeiger := ioRefListe^.next;
+Temp := ioRefListe;
+Temp^.next := Zeiger^.next;
+Zeiger^.next := Temp;
+ioRefListe := Zeiger;
+{Tausch erfolgreich}
+
+ { ioRefListe^.info = 1
+ * ioRefListe^.next^.info = 2
+ * ioRefListe^.next^.next^.info = 3}
+
+
+ 
+ 
+  
    
  
  writeln('Test');
@@ -165,6 +168,7 @@ end; { GibListeAus }
 begin
   {ListeEinlesen(RefListe);}
   ListeAufbauen(RefListe);
+  GibListeAus(RefListe);
   SortiereListe(RefListe);
   GibListeAus(RefListe)
 end.

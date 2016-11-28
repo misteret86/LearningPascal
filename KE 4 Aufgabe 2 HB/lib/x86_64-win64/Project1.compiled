@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Compiler Value="C:\lazarus\fpc\3.0.0\bin\x86_64-win64\fpc.exe" Date="1213098656"/>
+  <Params Value=" -MObjFPC -Scghi -O1 -g -gl -l -vewnhibq &quot;-FiB:\FernuniHagen\GitHub\LearningPascal\KE 4 Aufgabe 2 HB\lib\x86_64-win64&quot; &quot;-FuB:\FernuniHagen\GitHub\LearningPascal\KE 4 Aufgabe 2 HB\&quot; &quot;-FUB:\FernuniHagen\GitHub\LearningPascal\KE 4 Aufgabe 2 HB\lib\x86_64-win64\&quot; Project1.pas"/>
+</CONFIG>

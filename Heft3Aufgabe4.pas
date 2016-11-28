@@ -1,13 +1,4 @@
-{ Schreiben Sie eine PASCAL-Prozedur anhaengen, die zwei verschiedene 
-* lineare Listen durch Hintereinanderhängen zu einer einzigen Liste 
-* verknüpft. Ein Aufruf der Prozedur bewirkt also, daß anschließend 
-* die next-Komponente des letzten Elementes der ersten Liste auf das 
-* erste Element der zweiten Liste zeigt. }
-
-{$R+} { Range Checking }
-{$B+} { Complete Boolean Evaluation }
-
-program TesteSortiereListe(input, output);
+program Heft3Aufgabe4(input, output);
 
   type
   tNatZahl = 0..maxint;
@@ -19,8 +10,8 @@ program TesteSortiereListe(input, output);
 
   var
   RefListe : tRefListe;
-  
-  
+
+
    procedure ListeAufbauen(var outRefAnfang : tRefListe);
 	{ baut eine Liste aus einzulesenden integer-Zahlen
 	auf }
@@ -47,88 +38,55 @@ program TesteSortiereListe(input, output);
   procedure SortiereListe (var ioRefListe : tRefListe);
   { sortiert eine lineare Liste aufsteigend }
 
- {****MEIN CODE START****}
- var 
- Zeiger,
- SuchePosition,
- RefListeAnfang,
- Sortiert,
- Unsortiert : tRefListe;
- 
- gefunden : boolean;
- 
- begin
- RefListeAnfang := ioRefListe;
- Zeiger := ioRefListe;
+   {****MEIN CODE START****}
+   var
+   Zeiger,
+   SuchePosition,
+   RefListeAnfang,
+   Sortiert,
+   Unsortiert : tRefListe;
 
- Sortiert := Zeiger; 
- {Zeigt auf den aktuellen Zeiger bis zur sortierten Stelle}
- Unsortiert := Zeiger^.next;
- {Zeigt auf den aktuellen Zeiger ab unsortierter Stelle}
-  if (Zeiger <> nil) then
-	  if (Zeiger^.next <> nil) then
-	  { mindestens zwei Werte in Liste }
-	  begin	  
-		while Zeiger^.next <> nil do
-		{ Alle Elemente bis Ende der Liste durchgehen }
-		begin
-			if Sortiert^.info < Unsortiert^.info then
-			{ Kein kleineres Element in Unsortiert gefunden.}
-				Unsortiert := Unsortiert^.next
-			else
-			{ Kleineres Element in Unsortiert gefunden.}
-			begin
-				{1. An erstes Element setzen}
-				{2. Einfuegeposition suchen}
-				{3. Als letztes Element setzen}
-				
-				{1.}
-				if (RefListeAnfang^.info > Unsortiert^.info) then
-				begin
-					Unsortiert^.next := RefListeAnfang;
-					RefListeAnfang := Unsortiert^.next;
-					{ Sonderfall: Einfuegen am Listenanfang }
-				end
-				else
-				{2. und 3.}
-				begin
-					gefunden := false;
-					SuchePosition := RefListeAnfang;	
-					
-					while (SuchePosition^.next <> nil ) and
-						   (not gefunden) do
-						   if (SuchePosition^.next^.info > Unsortiert^.info) then
-								gefunden := true
-						   else
-								SuchePosition := SuchePosition^.next; 
-					if gefunden then
-					{2. Normalfall: Einfuegen in die Liste }
-					begin
-						Unsortiert^.next := SuchePosition;
-						SuchePosition^.next := Unsortiert;
-					end
-					else
-					{3. Sonderfall: Anhaengen an das Listenende }
-					begin
-						Unsortiert^.next := SuchePosition;
-						SuchePosition^.next := nil
-					end	
-				
-				end;
-				
-						
-					
-			Zeiger := Zeiger^.next;
-			end;
-		end;{Ende while Schleife. Zeiger^.next = nil ist true}	
-	  end;{endif Prüfung auf mindestens zwei Werte in Liste}
-   
- 
- writeln('Test');
- end; 
+   gefunden : boolean;
+
+   begin
+
+
+   if ioRefListe <> nil then
+   {Liste ist nicht leer}
+   begin
+     RefListeAnfang :=  ioRefListe;
+     Sortiert := ioRefListe;
+     Unsortiert := ioRefListe^.next;
+     while Unsortiert <> nil do
+     begin
+       {1. Am Anfang der Liste wird getauscht.}
+       {2. Mitten in der Liste wird getauscht.}
+       {3. Am Ende der Liste wird getauscht.}
+       begin
+       { Es sind mindestens zwei Elemente vorhanden }
+       { Die unsortierte Seite soll aufsteigend sortiert werden :
+         Sortiert < Unsortiert dann ist es korrekt und muss nicht getauscht werden}
+         {1.}
+         if RefListeAnfang^.info > Unsortiert^.info then
+         begin
+         { Unsortiert wird an erste Position gebracht}
+           Sortiert^.next := Unsortiert^.next;
+           Unsortiert^.next := ioRefListe;
+           ioRefListe :=  Unsortiert;
+           Sortiert := ioRefListe;
+           Unsortiert := ioRefliste^.next;
+         end;{Element an erste Position}
+       end;
+       Unsortiert := Unsortiert^.next;
+     end;{while end: Unsortiert zeigt auf nil}
+   end;
+
+
+   writeln('Test');
+   end;
  {****MEIN CODE ENDE****}
- 
- 
+
+
 procedure Anhaengen(var ioListe : tRefListe;
                         inZahl : tNatZahl);
 { Haengt inZahl an ioListe an }
@@ -193,3 +151,4 @@ begin
   SortiereListe(RefListe);
   GibListeAus(RefListe)
 end.
+
